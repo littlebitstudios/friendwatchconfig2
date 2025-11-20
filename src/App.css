@@ -1,0 +1,319 @@
+@import url(https://rsms.me/inter.css);
+
+body{
+  font-family: InterVariable, Inter, sans-serif;
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+/* Styling for the two-column main layout (from previous step) */
+.main-content-container {
+  display: flex;
+  gap: 20px; 
+  padding: 20px 0;
+}
+
+/* Styles for the individual panels (from previous step) */
+.config-panel,
+.friends-panel {
+  flex: 1; 
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-height: 400px;
+  overflow-y: auto; 
+}
+
+/* --- Friends List Styling --- */
+.friends-panel ul {
+  list-style: none;
+  padding: 0;
+}
+
+.friends-panel li {
+  /* 1. Add vertical space above and below each listing */
+  padding: 8px 0; 
+  
+  /* 2. Restore the dotted line separator at the bottom */
+  border-bottom: 1px dotted #ccc;
+}
+
+/* 3. Remove the border from the very last item for a cleaner look */
+.friends-panel li:last-child {
+  border-bottom: none;
+}
+
+/* --- NEW Search Bar Styling --- */
+.search-input-container {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333; /* Dark border for separation */
+}
+
+.search-input-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #222; /* Dark background */
+    color: white;
+    font-size: 1em;
+}
+
+/* --- Friend List Item Layout with Config Options --- */
+.friend-list-item {
+    display: flex;
+    flex-direction: column; /* Stack the header and config options vertically */
+    /* Inherits padding and border-bottom from .friends-panel li */
+}
+
+.friend-header {
+    margin-bottom: 5px; /* Space between name/status and options */
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; 
+}
+
+.playing-game {
+    margin-left: 5px;
+    font-style: italic;
+}
+
+/* --- Friend Config Options Layout --- */
+.friend-config-options {
+    display: flex;
+    gap: 20px; /* Space between the Alias input and Watched checkbox */
+    align-items: center;
+    margin-top: 5px;
+}
+
+.friend-option-group {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    padding: 5px 0;
+}
+
+.friend-option-group label {
+    margin-right: 8px;
+    font-weight: normal;
+    color: #bbb;
+}
+
+/* Specific styling for the Alias input to take up more space */
+.alias-input {
+    flex-grow: 1; /* Allows the alias input to fill available horizontal space */
+}
+
+.alias-input input[type="text"] {
+    padding: 4px 6px;
+    border: 1px solid #444;
+    border-radius: 3px;
+    background-color: #333;
+    color: white;
+    flex-grow: 1;
+    min-width: 100px; /* Ensure it's not too small */
+}
+
+.friend-option-group input[type="checkbox"] {
+    transform: none; 
+    margin: 0;
+}
+
+
+/* --- Config Panel Form Styling (Unchanged) --- */
+
+/* Text input group */
+.form-group-text {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group-text label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+  color: white;
+}
+
+.form-group-text input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1em;
+  color: black;
+}
+
+/* Checkbox group */
+.form-group-checkbox {
+  display: flex;
+  justify-content: space-between; /* Puts label on left, checkbox on right */
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 5px 0;
+  border-bottom: 1px dotted #eee;
+}
+
+.form-group-checkbox label {
+    color: white;
+}
+
+.form-group-checkbox input[type="checkbox"] {
+  transform: scale(1.3); /* Make checkbox slightly larger */
+  cursor: pointer;
+}
+
+/* Read-only data display */
+.read-only-data {
+    max-height: 150px;
+    overflow-y: scroll;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    margin-top: 5px;
+    color: black;
+}
+
+.sub-heading {
+    margin-top: 25px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* --- NEW Filter Control Styling --- */
+.filter-control-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333; /* Separator line */
+}
+
+.filter-control-container label {
+    font-weight: bold;
+    color: #bbb;
+    flex-shrink: 0; /* Prevents label from shrinking */
+}
+
+.filter-control-container select {
+    flex-grow: 1; /* Allows select box to fill space */
+    padding: 8px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #222; /* Dark background */
+    color: white;
+    font-size: 1em;
+    /* Basic reset for appearance in dark mode */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 30px; /* Space for arrow */
+}
+
+/* Update search input container border to prevent double lines */
+.search-input-container {
+    margin-bottom: 15px;
+    padding-bottom: 0px; /* Removed padding */
+    border-bottom: none; /* Removed border */
+}
+
+/* --- NEW Save Button and Header Styling --- */
+.config-panel-header {
+    display: flex;
+    justify-content: space-between; /* Puts h2 on left, button on right */
+    align-items: center;
+    margin-bottom: 15px; /* Space before the form starts */
+    border-bottom: 1px solid #555; /* Separator */
+    padding-bottom: 5px;
+}
+
+.config-panel-header h2 {
+    margin: 0; /* Remove default margin */
+}
+
+.save-button {
+    padding: 8px 12px;
+    background-color: #38761d; /* Dark green for save action */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.save-button:hover:not(:disabled) {
+    background-color: #5d9e32;
+}
+
+.save-button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+/* Ensure the .config-panel h2 is hidden if you prefer to use the H2 in the new header */
+.config-panel h2 {
+    margin: 0;
+}
+
+/* --- App Header Styling --- */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px; /* Adjust padding as needed */
+    padding-bottom:7px;
+    border-bottom: 2px solid #ffffff; /* Green separator */
+    margin-bottom: 20px;
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 1.8em;
+}
+
+.about-button, .back-button {
+    padding: 8px 12px;
+    background-color: #444; /* Dark gray for neutral action */
+    color: white;
+    border: 1px solid #666;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.about-button:hover, .back-button:hover {
+    background-color: #666;
+}
+
+/* --- About Page Styling (Optional) --- */
+.about-page {
+    padding: 20px;
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-page h1 {
+    font-size: 2em;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.about-page ul {
+    list-style: disc;
+    margin-left: 20px;
+    padding: 10px 0;
+}
+
+a{
+  color:lightgreen;
+}
