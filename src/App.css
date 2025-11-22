@@ -52,25 +52,6 @@ body {
     border-bottom: none;
 }
 
-/* --- NEW Search Bar Styling --- */
-.search-input-container {
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #333;
-    /* Dark border for separation */
-}
-
-.search-input-container input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #555;
-    border-radius: 4px;
-    background-color: #222;
-    /* Dark background */
-    color: white;
-    font-size: 1em;
-}
-
 /* --- Friend List Item Layout with Config Options --- */
 .friend-list-item {
     display: flex;
@@ -237,15 +218,6 @@ body {
     background-position: right 8px center;
     padding-right: 30px;
     /* Space for arrow */
-}
-
-/* Update search input container border to prevent double lines */
-.search-input-container {
-    margin-bottom: 15px;
-    padding-bottom: 0px;
-    /* Removed padding */
-    border-bottom: none;
-    /* Removed border */
 }
 
 /* --- NEW Save Button and Header Styling --- */
