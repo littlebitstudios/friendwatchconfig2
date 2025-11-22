@@ -319,7 +319,7 @@ function App() {
 
                               return (
                                   <li style={{ margin:"10px 0px" }}>
-                                    <strong>{friendObject ? friendObject.name : "Unknown"}</strong> <a href={`#${id}`}>({id.substring(0,4)}...{id.slice(-4)})</a> <button type='button' onClick={(e) => handleWatchedToggle(id, false)}>Unwatch</button>
+                                    <strong>{friendObject ? friendObject.name : "Unknown"}</strong> <a href={`#${id}`}>({id.substring(0,4)}...{id.slice(-4)})</a> <button type='button' onClick={() => handleWatchedToggle(id, false)}>Unwatch</button>
                                   </li>
                               )
                             })}
@@ -332,7 +332,7 @@ function App() {
 
                               return (
                                 <li style={{margin:"10px 0px"}}>
-                                  <strong>{config.aliases[id]} | <em>{friendObject ? `Original Name: ${friendObject.name}` : "Original Name Unknown"}</em></strong> <a href={`#${id}`}>({id.substring(0,4)}...{id.slice(-4)})</a> <button type='button' onClick={(e) => handleAliasChange(id, "")}>Remove Alias</button>
+                                  <strong>{config.aliases[id]} | <em>{friendObject ? `Original Name: ${friendObject.name}` : "Original Name Unknown"}</em></strong> <a href={`#${id}`}>({id.substring(0,4)}...{id.slice(-4)})</a> <button type='button' onClick={() => handleAliasChange(id, "")}>Remove Alias</button>
                                 </li>
                               )
                             })}
