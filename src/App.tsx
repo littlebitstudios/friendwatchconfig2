@@ -234,7 +234,6 @@ function App() {
                       <button 
                           onClick={handleSaveConfig} 
                           className="save-button"
-                          disabled={Object.keys(config.aliases).length === 0}
                       >
                           ⬇️ Save Config
                       </button>
@@ -313,20 +312,31 @@ function App() {
 
                           {/* --- Non-Editable Data Display --- */}
                           <hr style={{ margin: '20px 0' }} />
-                          <h3 className="sub-heading">Non-Editable Data</h3>
-                          <h4>Watched Friend IDs ({config.watched.length})</h4>
-                          <div className="read-only-data">
-                              <pre style={{ fontSize: '0.8em', overflowX: 'auto' }}>
-                                  {config.watched.join(', ')}
-                              </pre>
-                          </div>
+                          <h3 className="sub-heading">Watched Friends</h3>
+                          <ul>
+                            {config.watched.map((id) => {
+                              const friendObject = friends.find((friend) => friend.nsaId === id);
 
-                          <h4>Aliases ({Object.keys(config.aliases).length})</h4>
-                          <div className="read-only-data">
-                              <pre style={{ fontSize: '0.8em' }}>
-                                  {JSON.stringify(config.aliases, null, 2)}
-                              </pre>
-                          </div>
+                              return (
+                                  <li style={{ margin:"10px 0px" }}>
+                                    <strong>{friendObject ? friendObject.name : "Unknown"}</strong> <a href={`#${id}`}>({id.substring(0,4)}...{id.slice(-4)})</a> <button type='button' onClick={(e) => handleWatchedToggle(id, false)}>Unwatch</button>
+                                  </li>
+                              )
+                            })}
+                          </ul>
+
+                          <h3 className="sub-heading">Aliases ({Object.keys(config.aliases).length})</h3>
+                          <ul>
+                            {Object.keys(config.aliases).map((id) => {
+                              const friendObject = friends.find((friend) => friend.nsaId === id);
+
+                              return (
+                                <li style={{margin:"10px 0px"}}>
+                                  <strong>{config.aliases[id]} | <em>{friendObject ? `Original Name: ${friendObject.name}` : "Original Name Unknown"}</em></strong> <a href={`#${id}`}>({id.substring(0,4)}...{id.slice(-4)})</a> <button type='button' onClick={(e) => handleAliasChange(id, "")}>Remove Alias</button>
+                                </li>
+                              )
+                            })}
+                          </ul>
 
                       </form>
                   ) : (
@@ -335,29 +345,10 @@ function App() {
               </div>
 
               <div className="friends-panel">
-                  <h2>Friends List ({friends.length} Loaded)</h2>
-
-                  <div className="filter-control-container">
-                      <label htmlFor="filter-select">Filter By:</label>
-                      <select
-                          id="filter-select"
-                          value={filterType}
-                          onChange={handleFilterChange}
-                      >
-                          <option value="ALL">All Friends</option>
-                          <option value="WATCHED">Watched</option>
-                          <option value="HAS_ALIAS">Has Alias</option>
-                      </select>
-                  </div>
-
-                  <div className="search-input-container">
-                      <input
-                          type="text"
-                          placeholder={`Search ${friends.length} friends...`}
-                          value={searchTerm}
-                          onChange={handleSearchChange}
-                      />
-                  </div>
+                  <h2 style={{marginBottom:"5px"}}>Friends List ({friends.length} Loaded)</h2>
+                  <small style={{marginBottom:"25px"}}>Search your friends using the browser's Find function (Ctrl+F or Cmd+F)</small>
+                  
+                  {/* REMOVED: search-input-container and filter-control-container */}
 
                   {friends.length > 0 ? (
                       <ul>
