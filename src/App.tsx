@@ -365,13 +365,13 @@ function App() {
                               const currentAlias = config.aliases[friend.nsaId] || '';
 
                               return (
-                                  <li key={friend.id} className="friend-list-item">
+                                  <li id={friend.nsaId} key={friend.id} className="friend-list-item">
                                       <div className="friend-header">
-                                          {getFriendStatus(friend)}<strong style={{marginLeft:"5px"}}>| {friend.name}</strong>
+                                          {getFriendStatus(friend)}<strong style={{marginLeft:"5px"}}>| {friend.name}</strong>&nbsp;({friend.nsaId})
 
                                           {isGame(friend.presence.game) && friend.presence.game.name && (
                                               <span className="playing-game">
-                                                  - Playing {friend.presence.game.name}
+                                                  - <small>🎮 {friend.presence.game.name} ({friend.presence.platform == 2 ? "NS2" : "NS1"})</small>
                                               </span>
                                           )}
                                       </div>
