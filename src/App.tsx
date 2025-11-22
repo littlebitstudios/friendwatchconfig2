@@ -38,9 +38,6 @@ interface Friend {
   route: Route; presence: Presence;
 }
 
-// Define the possible filter values
-type FilterType = 'ALL' | 'WATCHED' | 'HAS_ALIAS';
-
 // --- Type Guard for Game ---
 function isGame(game: unknown): game is Game {
   return typeof game === 'object' && game !== null && 'name' in game && typeof (game as Game).name === 'string';
@@ -67,9 +64,6 @@ function App() {
   });
   
   const [friends, setFriends] = useState<Friend[]>([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterType, setFilterType] = useState<FilterType>('ALL');
-
   // NEW: State for view management
   const [view, setView] = useState<'config' | 'about'>('config');
 
@@ -215,35 +209,6 @@ function App() {
     if (status === 'AWAY') return '🌙 AWAY';
     return `⚪ ${status}`;
   }
-
-  const handleSearchChange = (e: FormChangeEvent) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleFilterChange = (e: FormChangeEvent) => {
-    setFilterType(e.target.value as FilterType);
-  };
-
-  // --- Filtering Logic ---
-  const watchedSet = new Set(config.watched);
-
-  const filteredFriends = friends.filter(friend => {
-    const nameMatch = friend.name?.toLowerCase().includes(searchTerm.toLowerCase());
-    if (!nameMatch) return false;
-
-    if (filterType === 'ALL') return true;
-
-    if (filterType === 'WATCHED') {
-      return watchedSet.has(friend.nsaId);
-    }
-
-    if (filterType === 'HAS_ALIAS') {
-      const alias = config.aliases[friend.nsaId] ?? '';
-      return alias.trim().length > 0;
-    }
-
-    return true;
-  });
 
   // --- Conditional Rendering of the Configuration View ---
   const renderConfigView = () => (
@@ -396,7 +361,7 @@ function App() {
 
                   {friends.length > 0 ? (
                       <ul>
-                          {filteredFriends.map((friend) => {
+                          {friends.map((friend) => { // Use displayedFriends (now just 'friends')
                               const currentAlias = config.aliases[friend.nsaId] || '';
 
                               return (
@@ -442,10 +407,6 @@ function App() {
                       </ul>
                   ) : (
                       <p>Please load the friends JSON file.</p>
-                  )}
-                  {/* Display message if filtering results in no matches */}
-                  {friends.length > 0 && filteredFriends.length === 0 && (
-                      <p>No friends found matching your search or filter criteria.</p>
                   )}
               </div>
           </div>
